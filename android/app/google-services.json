@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "386793799177",
+    "project_id": "bollino-c7e00",
+    "storage_bucket": "bollino-c7e00.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:386793799177:android:98d2d12f334aed5a2e02d8",
+        "android_client_info": {
+          "package_name": "com.example.bollino"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "386793799177-hsaaa1s09ge3la3nsr7bkrc4brvtreg2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzAtNQESGWdqb1Nd9JJVE3HAt68zIHMmk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "386793799177-hsaaa1s09ge3la3nsr7bkrc4brvtreg2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
