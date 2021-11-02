@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import '../registration_produttore.dart';
-import '../registration_cliente.dart';
+import '../registration.dart';
 import '../login_cliente.dart';
 import '../login_produttore.dart';
 import '../home.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import '../autenticazione.dart';
+import '../login.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -41,7 +41,7 @@ class _MyAppState extends State<MyApp> {
     } else {
       // Navigator.of(context)
       //     .pushReplacement(MaterialPageRoute(builder: (context) => Autenticazione()));
-      return Autenticazione();
+      return Login();
     }
     return Container();
   }
