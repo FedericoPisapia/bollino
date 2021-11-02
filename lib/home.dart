@@ -1,11 +1,11 @@
-import 'package:bollino/businessRegistration.dart';
+import 'package:bollino/business_registration.dart';
 import 'package:flutter/material.dart';
-import '../lettore_qr_cliente.dart';
+import '../home_business.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../metodi_database.dart';
-import '../registraIlTuoLocale.dart';
+import '../altro.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class Home extends StatefulWidget {
@@ -46,7 +46,7 @@ class _HomeState extends State<Home> {
         ),
       ],
     ),
-    RegistraIlTuoLocale(),
+    Altro(),
   ];
 
   void _onItemTapped(int index) {

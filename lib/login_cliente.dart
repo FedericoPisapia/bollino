@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import '../lettore_qr_cliente.dart';
+import '../home_business.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 class LoginCliente extends StatefulWidget {
@@ -80,7 +80,7 @@ class _LoginClienteState extends State<LoginCliente> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>  QrCliente()),
+                              builder: (context) =>  Home_Business()),
                         );
                       } on FirebaseAuthException catch (e) {
                         if (e.code == 'user-not-found') {
