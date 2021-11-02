@@ -1,17 +1,19 @@
+import 'package:bollino/registration.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../home_business.dart';
+import '../home.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-class LoginCliente extends StatefulWidget {
-  const LoginCliente({Key? key}) : super(key: key);
+class Login extends StatefulWidget {
+  const Login({Key? key}) : super(key: key);
 
   @override
-  _LoginClienteState createState() => _LoginClienteState();
+  _LoginState createState() => _LoginState();
 }
 
-class _LoginClienteState extends State<LoginCliente> {
+class _LoginState extends State<Login> {
   String Password = '';
   String Email = '';
   bool emailVal = true;
@@ -21,14 +23,16 @@ class _LoginClienteState extends State<LoginCliente> {
   @override
   Widget build(BuildContext context) {
 
-
-
     return Scaffold(
-        appBar: AppBar(
-          title: Text('login cliente'),
-        ),
+
         body: SingleChildScrollView(
             child: Column(children: [
+              SizedBox(height: 40),
+
+              Container(child: Image.asset('images/logo.png'),),
+
+              SizedBox(height: 50),
+
               Container(
                 margin: const EdgeInsets.all(20),
                 child: TextField(
@@ -75,12 +79,12 @@ class _LoginClienteState extends State<LoginCliente> {
                       try {
                         UserCredential userCredential = await FirebaseAuth.instance
                             .signInWithEmailAndPassword(
-                                email: Email, password: Password);
+                            email: Email, password: Password);
 
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>  Home_Business()),
+                              builder: (context) =>  Home()),
                         );
                       } on FirebaseAuthException catch (e) {
                         if (e.code == 'user-not-found') {
@@ -99,7 +103,12 @@ class _LoginClienteState extends State<LoginCliente> {
                       }
                     },
                     child: Text('Login')),
-              )
-        ])));
+              ),
+              TextButton(onPressed: (){Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>  Registration()),
+              );}, child: Text('vuoi registrarti?'))
+            ])));
   }
 }

@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
-import '../lettore_qr_cliente.dart';
+import '../home_business.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../metodi_database.dart';
-class RegistrationCliente extends StatefulWidget {
-  const RegistrationCliente({Key? key}) : super(key: key);
+import '../home.dart';
+class Registration extends StatefulWidget {
+  const Registration({Key? key}) : super(key: key);
 
   @override
-  State<RegistrationCliente> createState() => _RegistrationCliente();
+  State<Registration> createState() => _Registration();
 }
 
-class _RegistrationCliente extends State<RegistrationCliente> {
+class _Registration extends State<Registration> {
   CollectionReference users = FirebaseFirestore.instance.collection('users');
 
   String UserName = '';
@@ -23,7 +24,7 @@ class _RegistrationCliente extends State<RegistrationCliente> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("registrationCliente"),
+        title: const Text("Registrazione"),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -88,7 +89,7 @@ class _RegistrationCliente extends State<RegistrationCliente> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>  QrCliente()),
+                            builder: (context) =>  Home()),
                       );
                     } else {
                       setState(() {
