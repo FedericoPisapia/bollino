@@ -85,7 +85,7 @@ class _Registration extends State<Registration> {
                           .instance
                           .createUserWithEmailAndPassword(
                               email: Email, password: Password);
-                      addUser(users, Email);
+                      addUser(users, Email, UserName);
                       Navigator.push(
                         context,
                         MaterialPageRoute(
