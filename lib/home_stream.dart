@@ -11,7 +11,7 @@ class HomeStream extends StatefulWidget {
 }
 
 class _HomeStreamState extends State<HomeStream> {
-  final Stream<QuerySnapshot> _usersStream = FirebaseFirestore.instance.collection(getUid()).snapshots();
+  final Stream<QuerySnapshot> _usersStream = FirebaseFirestore.instance.collection('users').snapshots();
 
   @override
   Widget build(BuildContext context) {

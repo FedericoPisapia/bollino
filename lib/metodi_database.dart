@@ -85,3 +85,4 @@ Future<String> getUserEmail(uid) async {
       .get();
   return snapShot['Email'];
 }
+
