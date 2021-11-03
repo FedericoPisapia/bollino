@@ -6,6 +6,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../metodi_database.dart';
 import '../altro.dart';
+import '../home_stream.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class Home extends StatefulWidget {
@@ -18,35 +19,29 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   int _selectedIndex = 0;
-  
-  static List<Widget> _widgetOptions = <Widget>[
-    SingleChildScrollView(
-      child: Column(
-        children: [
-
-          Container(
-            margin: const EdgeInsets.all(50),
-            child: Image.asset('images/logo.png'),
-          ),
-        ],
-      ),
-    ),
+  static bool home = true;
+  static final List<Widget> _widgetOptions = <Widget>[
+    HomeStream(),
     Column(
       children: [
-        Container(
-          margin: const EdgeInsets.all(50),
-          child: Image.asset('images/logo.png'),
+        Center(
+          child: Container(
+            margin: const EdgeInsets.all(35),
+            child: Image.asset('images/logo.png'),
+          ),
         ),
         Container(
           child: QrImage(
-            data: "andrea capone",
+            data: getUid(),
             version: QrVersions.auto,
             size: 200.0,
           ),
         ),
       ],
     ),
-    Altro(),
+    Altro(
+      home: home,
+    ),
   ];
 
   void _onItemTapped(int index) {
@@ -114,5 +109,3 @@ class _HomeState extends State<Home> {
     );
   }
 }
-
-

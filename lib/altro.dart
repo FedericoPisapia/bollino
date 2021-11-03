@@ -3,8 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:bollino/business_registration.dart';
 import 'package:bollino/metodi_database.dart';
 import '../home_business.dart';
+import '../home.dart';
+
 class Altro extends StatefulWidget {
-  const Altro({Key? key}) : super(key: key);
+  bool home;
+  Altro({Key? key, required this.home}) : super(key: key);
 
   @override
   State<Altro> createState() => _AltroState();
@@ -31,7 +34,8 @@ class _AltroState extends State<Altro> {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => BusinessRegistration()),
+                        MaterialPageRoute(
+                            builder: (context) => BusinessRegistration()),
                       );
                     },
                     child: Row(
@@ -55,12 +59,17 @@ class _AltroState extends State<Altro> {
                     textColor: Colors.white,
                     height: 60.0,
                     color: Colors.cyan,
-                    onPressed: () {
+                    onPressed: () {if(widget.home) {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => Home_Business()),
+                        MaterialPageRoute(
+                            builder: (context) => Home_Business()),
                       );
-                    },
+                    }else Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => Home()),
+                    );},
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -83,8 +92,6 @@ class _AltroState extends State<Altro> {
                 return Container();
               }
             }),
-
-
         FlatButton(
           textColor: Colors.white,
           height: 60.0,
@@ -110,8 +117,9 @@ class _AltroState extends State<Altro> {
           textColor: Colors.white,
           height: 60.0,
           color: Colors.cyan,
-          onPressed: () async {await FirebaseAuth.instance.signOut();
-          Navigator.pop(context);
+          onPressed: () async {
+            await FirebaseAuth.instance.signOut();
+            Navigator.pop(context);
           },
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,

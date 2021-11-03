@@ -5,14 +5,14 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../metodi_database.dart';
 
-Future<void> addUser(users, email) {
+Future<void> addUser(users, email, UserName) {
   String uid = getUid();
   return users
       .doc(uid)
       .set({
         'Uid': uid,
         'Email': email,
-      })
+        'UserName': UserName})
       .then((value) => print("User Added"))
       .catchError((error) => print("Failed to add user: $error"));
 }
@@ -47,11 +47,12 @@ Future<void> addpoint(utente, produttore) {
   print('uid produttore= ' + produttore);
   return users
       .doc(utente)
-      .update({produttore: FieldValue.increment(1)})
+      .update({"Business. "+ produttore: FieldValue.increment(1)})
       .then((value) => print("User Updated"))
       .catchError((error) => print("Failed to update user: $error"));
 }
-Future<bool> verifyBusiness()async {
+
+Future<bool> verifyBusiness() async {
   String uid = getUid();
   final snapShot = await FirebaseFirestore.instance
       .collection('business')
@@ -62,4 +63,25 @@ Future<bool> verifyBusiness()async {
     return Future<bool>.value(false);
   }
   return Future<bool>.value(true);
+}
+
+Future<bool> verifyUsers(uid) async {
+  print(uid);
+  final snapShot = await FirebaseFirestore.instance
+      .collection('users')
+      .doc(uid) // varuId in your case
+      .get();
+
+  if (snapShot == null || !snapShot.exists) {
+    return Future<bool>.value(false);
   }
+  return Future<bool>.value(true);
+}
+
+Future<String> getUserEmail(uid) async {
+  final snapShot = await FirebaseFirestore.instance
+      .collection('users')
+      .doc(uid) // varuId in your case
+      .get();
+  return snapShot['Email'];
+}
