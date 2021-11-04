@@ -1,3 +1,7 @@
+import 'dart:convert';
+import 'dart:core';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -11,31 +15,56 @@ class HomeStream extends StatefulWidget {
 }
 
 class _HomeStreamState extends State<HomeStream> {
-  final Stream<QuerySnapshot> _usersStream = FirebaseFirestore.instance.collection('users').snapshots();
+  final Stream<DocumentSnapshot> _usersStream =
+      FirebaseFirestore.instance.collection('users').doc(getUid()).snapshots();
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<QuerySnapshot>(
-      stream: _usersStream,
-      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-        if (snapshot.hasError) {
-          return Text('Something went wrong');
-        }
+    return Scaffold(
 
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return Text("Loading");
-        }
+      body: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Center(
+            child: Container(
+              margin: const EdgeInsets.all(35),
+              child: Image.asset('images/logo.png'),
+            ),
+          ),
+          StreamBuilder<DocumentSnapshot>(
+            stream: _usersStream,
+            builder: (BuildContext context,
+                AsyncSnapshot<DocumentSnapshot> snapshot) {
+              if (snapshot.hasError) {
+                return Text('Something went wrong');
+              }
 
-        return ListView(
-          children: snapshot.data!.docs.map((DocumentSnapshot document) {
-            Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
-            return ListTile(
-              title: Text(data['Email']),
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Text("Loading");
+              }
+              if (snapshot.hasData) {
+                Map<String, dynamic> items = snapshot.data!['Business'];
+                return Expanded(
+                  child: ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    itemCount: items.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return ListTile(
+                          title: Text(items.keys.elementAt(index).toString()),
+                          subtitle: Text(
+                            items.values.elementAt(index).toString(),
+                          ));
+                    },
+                  ),
+                );
+              }
 
-            );
-          }).toList(),
-        );
-      },
+              return Container();
+            },
+          ),
+        ],
+      ),
     );
   }
 }

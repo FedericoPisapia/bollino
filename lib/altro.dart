@@ -118,6 +118,29 @@ class _AltroState extends State<Altro> {
           height: 60.0,
           color: Colors.cyan,
           onPressed: () async {
+
+          },
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Icon(
+                  Icons.ac_unit,
+                  color: Colors.red,
+                ),
+              ),
+              Text(
+                'foto',
+              ),
+            ],
+          ),
+        ),
+        FlatButton(
+          textColor: Colors.white,
+          height: 60.0,
+          color: Colors.cyan,
+          onPressed: () async {
             await FirebaseAuth.instance.signOut();
             Navigator.pop(context);
           },
