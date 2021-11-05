@@ -4,6 +4,7 @@ import 'package:bollino/business_registration.dart';
 import 'package:bollino/metodi_database.dart';
 import '../home_business.dart';
 import '../home.dart';
+import 'UI/interfaccia_home.dart';
 import '../metodi_image.dart';
 
 class Altro extends StatefulWidget {
@@ -110,6 +111,32 @@ class _AltroState extends State<Altro> {
               ),
               Text(
                 'il mio account',
+              ),
+            ],
+          ),
+        ),
+        FlatButton(
+          textColor: Colors.white,
+          height: 60.0,
+          color: Colors.cyan,
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => HomeUI()),
+            );},
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Icon(
+                  Icons.assignment_ind_sharp,
+                  color: Colors.white,
+                ),
+              ),
+              Text(
+                'HOME',
               ),
             ],
           ),
