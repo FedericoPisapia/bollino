@@ -4,6 +4,7 @@ import 'package:bollino/business_registration.dart';
 import 'package:bollino/metodi_database.dart';
 import '../home_business.dart';
 import '../home.dart';
+import '../metodi_image.dart';
 
 class Altro extends StatefulWidget {
   bool home;
@@ -117,8 +118,9 @@ class _AltroState extends State<Altro> {
           textColor: Colors.white,
           height: 60.0,
           color: Colors.cyan,
-          onPressed: () async {
-
+          onPressed: ()  {
+           Upload();
+           downloadURL();
           },
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,

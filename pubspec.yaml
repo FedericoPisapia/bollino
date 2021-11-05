@@ -42,8 +42,10 @@ dependencies:
   image_picker:
   path: ^1.8.0
   firebase_analytics: ^5.0.6
-
+  images_picker: ^1.2.5
   http: ^0.13.4
+  dio: ^4.0.1
+  video_player: ^2.2.6
 
 dev_dependencies:
   flutter_test:
@@ -67,6 +69,7 @@ flutter:
       - images/logo.png
       - images/spunta.png
       - images/X.png
+      - images/tessera.jpg
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

@@ -7,9 +7,11 @@ import 'package:image_picker/image_picker.dart';
 import '../home_business.dart';
 import '../home.dart';
 import '../home_business.dart';
+import '../business_registration2.dart';
 import '../metodi_database.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import '../metodi_image.dart';
 
 class BusinessRegistration extends StatefulWidget {
   const BusinessRegistration({Key? key}) : super(key: key);
@@ -57,7 +59,7 @@ class _BusinessRegistrationState extends State<BusinessRegistration> {
           },
         ),
       ),
-      if (partitaIva.length != 11 && Val)
+      if ( Val)
         Container(
           child: Text('inserimento errato'),
         ),
@@ -125,6 +127,7 @@ class _BusinessRegistrationState extends State<BusinessRegistration> {
           },
         ),
       ),
+
       ElevatedButton(
           onPressed: () {
             setState(() {
@@ -134,7 +137,7 @@ class _BusinessRegistrationState extends State<BusinessRegistration> {
                 orarioApertura, orarioChiusura);
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => Home_Business()),
+              MaterialPageRoute(builder: (context) => BusinessRegistration2()),
             );
           },
           child: Text('Conferma registrazione'))
