@@ -20,7 +20,39 @@ class Body extends StatelessWidget {
             pres: () {},
           ),
           //40% dello screen
-          Container(width: size.width *0.4,)
+          Container(
+            width: size.width * 0.4,
+            margin: EdgeInsets.only(left: 10, top: 5, bottom: 25),
+            child: Column(
+              children: <Widget>[
+                Image.asset(
+                  'images/tessera.jpg',
+                ),
+                Container(
+                  padding: EdgeInsets.all(10 / 2),
+                  decoration: BoxDecoration(color: Colors.white30, boxShadow: [
+                    BoxShadow(
+                        offset: Offset(0, 10),
+                        blurRadius: 50,
+                        color: Colors.deepPurpleAccent.withOpacity(0.5))
+                  ]),
+                  child: Row(
+                    children: <Widget>[
+                      RichText(
+                        text: TextSpan(children: [
+                          TextSpan(
+                              text: "Piedi",
+                              style: TextStyle(color: Colors.black)),
+                        ]),
+                      ),
+                      Spacer(),
+                      Text('piedi')
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          )
         ],
       ),
     );
