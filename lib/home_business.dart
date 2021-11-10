@@ -8,6 +8,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../metodi_database.dart';
+import '../pagina_principale_business.dart';
 import '../altro.dart';
 import '../qr_verificato.dart';
 
@@ -25,16 +26,7 @@ class _Home_BusinessState extends State<Home_Business> {
   int _selectedIndex = 0;
 
   static List<Widget> _widgetOptions = <Widget>[
-    SingleChildScrollView(
-      child: Column(
-        children: [
-          Container(
-            margin: const EdgeInsets.all(50),
-            child: Image.asset('images/logo.png'),
-          ),
-        ],
-      ),
-    ),
+    PaginaInizialeBusiness(),
     QRViewExample(),
     Altro(home: home,),
   ];

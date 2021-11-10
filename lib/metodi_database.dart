@@ -112,6 +112,17 @@ Future<String> getUserEmail(uid) async {
   return snapShot['Email'];
 }
 
+Future<DocumentSnapshot<Map<String, dynamic>>> getBusiness(Uid) async {
+  String uid = Uid.trim();
+  final snapShot = await FirebaseFirestore.instance
+      .collection('business')
+      .doc(uid) // varuId in your case
+      .get();
+
+  return snapShot;
+}
+
+
 Future<void> addUrl(url) async {
   final CollectionReference business =
   FirebaseFirestore.instance.collection('business');
@@ -120,5 +131,16 @@ Future<void> addUrl(url) async {
       .doc(getUid())
       .update({"URL_Logo": url})
       .then((value) => print("User Updated"))
+      .catchError((error) => print("Failed to update user: $error"));
+}
+
+Future<void> addOfferta(titolo, descrizione) async{
+  String uid = getUid();
+  final CollectionReference business =
+  FirebaseFirestore.instance.collection('business');
+  return business
+      .doc(uid)
+      .update({"Offerta. "+ titolo: descrizione})
+      .then((value) => print("Offerta Updated"))
       .catchError((error) => print("Failed to update user: $error"));
 }

@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:core';
-
+import '../UI/business_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -58,11 +58,22 @@ class _HomeStreamState extends State<HomeStream> {
                     itemBuilder: (BuildContext context, int index) {
                       return ListTile(
                         title: Stack(children: [
-                          Container(
-                            child: Image.asset(
-                              'images/tessera.jpg',
-                              width: 500,
-                              height: 200,
+                          GestureDetector(
+                            onTap: (){
+
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => BusinessPage(uid:items.keys
+                                        .elementAt(index)
+                                        .toString())),
+                              );},
+                            child: Container(
+                              child: Image.asset(
+                                'images/tessera.jpg',
+                                width: 500,
+                                height: 200,
+                              ),
                             ),
                           ),
                           Container(
