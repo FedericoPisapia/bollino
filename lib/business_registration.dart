@@ -30,6 +30,7 @@ class _BusinessRegistrationState extends State<BusinessRegistration> {
   String indirizzo = '';
   String orarioApertura = '';
   String orarioChiusura = '';
+  String nome = '';
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +43,23 @@ class _BusinessRegistrationState extends State<BusinessRegistration> {
         height: 150,
         width: 150,
       ),
+              SizedBox(height: 50),
+              Container(
+                margin: const EdgeInsets.all(20),
+                child: TextField(
+                  //controller: nameController,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Nome Business',
+                  ),
+                  onChanged: (text) {
+                    setState(() {
+                      nome = text;
+                      print(text);
+                    });
+                  },
+                ),
+              ),
       SizedBox(height: 50),
       Container(
         margin: const EdgeInsets.all(20),
@@ -133,7 +151,7 @@ class _BusinessRegistrationState extends State<BusinessRegistration> {
             setState(() {
               Val = true;
             });
-            addBusiness(business, partitaIva, numeroDiTelefono, indirizzo,
+            addBusiness(business,nome, partitaIva, numeroDiTelefono, indirizzo,
                 orarioApertura, orarioChiusura);
             Navigator.push(
               context,

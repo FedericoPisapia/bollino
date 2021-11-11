@@ -1,8 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-class HeaderWithSearchBox extends StatelessWidget {
-  const HeaderWithSearchBox({
+class HeaderWithSearchBox extends StatefulWidget {
+   HeaderWithSearchBox({
     Key? key,
     required this.size,
   }) : super(key: key);
@@ -10,11 +10,18 @@ class HeaderWithSearchBox extends StatelessWidget {
   final Size size;
 
   @override
+  State<HeaderWithSearchBox> createState() => _HeaderWithSearchBoxState();
+}
+
+class _HeaderWithSearchBoxState extends State<HeaderWithSearchBox> {
+  String search = '';
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(bottom: 10),
       // 20% dello screen
-      height: size.height * 0.2,
+      height: widget.size.height * 0.2,
       child: Stack(
         children: <Widget>[
           Container(
@@ -22,7 +29,7 @@ class HeaderWithSearchBox extends StatelessWidget {
               left: 10,
               bottom: 50,
             ),
-            height: size.height * 0.21 - 27, //grandezza bordo viola
+            height: widget.size.height * 0.21 - 27, //grandezza bordo viola
             decoration: const BoxDecoration(
                 color: Colors.deepPurpleAccent,
                 borderRadius: BorderRadius.only(
@@ -64,6 +71,12 @@ class HeaderWithSearchBox extends StatelessWidget {
                       )
                     ]),
                 child: TextField(
+                  onChanged: (text) {
+                    setState(() {
+                      search = text;
+                      print(text);
+                    });
+                  },
                   decoration: InputDecoration(
                       hintText: "Search",
                       hintStyle: TextStyle(

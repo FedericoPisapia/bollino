@@ -25,7 +25,7 @@ String getUid() {
   return currentUser!.uid;
 }
 
-Future<void> addBusiness(business, partitaIva, numerodiTelefono, indirizzo,
+Future<void> addBusiness(business,nome, partitaIva, numerodiTelefono, indirizzo,
     orarioApertura, orarioChiusura) async{
   String uid = getUid();
 
@@ -33,6 +33,7 @@ Future<void> addBusiness(business, partitaIva, numerodiTelefono, indirizzo,
       .doc(uid)
       .set({
         'Uid': uid,
+        'NomeBusiness': nome,
         'Partita Iva': partitaIva,
         'Numero di telefono': numerodiTelefono,
         'Indirizzo': indirizzo,
@@ -82,8 +83,8 @@ Future<bool> verifyBusiness() async {
   return Future<bool>.value(true);
 }
 
-Future<String> getUrlLogo() async {
-  String uid = getUid();
+Future<String> getUrlLogo(uid) async {
+
   final snapShot = await FirebaseFirestore.instance
       .collection('business')
       .doc(uid) // varuId in your case
@@ -143,4 +144,13 @@ Future<void> addOfferta(titolo, descrizione) async{
       .update({"Offerta. "+ titolo: descrizione})
       .then((value) => print("Offerta Updated"))
       .catchError((error) => print("Failed to update user: $error"));
+}
+
+Future<List<String>> getUrlLogoEName(String uid) async {
+
+  final snapShot = await FirebaseFirestore.instance
+      .collection('business')
+      .doc(uid) // varuId in your case
+      .get();
+  return [snapShot.data()!['URL_Logo'].toString(),snapShot.data()!['NomeBusiness'].toString() ];
 }

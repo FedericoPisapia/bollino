@@ -32,7 +32,7 @@ class _BusinessRegistration2State extends State<BusinessRegistration2> {
               },
               child: Text('carica logo')),
           FutureBuilder(
-              future: getUrlLogo(),
+              future: getUrlLogo(getUid()),
               builder: (BuildContext context, AsyncSnapshot<String> snapshot) {if(snapshot.hasData && snapshot.data !=''){
                 String? url = snapshot.data;
                 return Image.network(url!);}
