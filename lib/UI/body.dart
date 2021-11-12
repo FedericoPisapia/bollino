@@ -83,8 +83,10 @@ class _BodyState extends State<Body> {
                   onChanged: (text) {
                     setState(() {
                       search = text;
+                      print(search);
                       final filteredMap = new Map.fromIterable(
                           widget.items.keys.where((k) => k.startsWith(search)), key: (k) => k, value: (k) => widget.items[k]);
+                      print(filteredMap);
                     });
                   },
                   decoration: InputDecoration(
