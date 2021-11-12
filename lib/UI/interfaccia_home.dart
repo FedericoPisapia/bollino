@@ -36,7 +36,6 @@ class _HomeUIState extends State<HomeUI> {
             }
             if (snapshot.hasData) {
               Map<String, dynamic> items = snapshot.data!['Business'];
-              print('-------------');
               return Body(items);
             }
             return Container();

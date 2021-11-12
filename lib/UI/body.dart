@@ -18,7 +18,12 @@ class _BodyState extends State<Body> {
   String uri = '';
   String nomeLocale = '';
   String search = '';
+  Map filteredMap = new Map() ;
   @override
+
+
+  @override
+  void initState(){Map filteredMap= widget.items;}
   Widget build(BuildContext context) {
     // Size size = MediaQuery.of(context).size; prende dimensione di tutto lo screen
     Size size = MediaQuery.of(context).size;
@@ -84,7 +89,7 @@ class _BodyState extends State<Body> {
                     setState(() {
                       search = text;
                       print(search);
-                      final filteredMap = new Map.fromIterable(
+                      filteredMap = new Map.fromIterable(
                           widget.items.keys.where((k) => k.startsWith(search)), key: (k) => k, value: (k) => widget.items[k]);
                       print(filteredMap);
                     });
@@ -106,7 +111,7 @@ class _BodyState extends State<Body> {
             pres: () {},
           ),
           //40% dello screen
-          tessere(),
+          tessere(filteredMap),
           TitleWithMore(
             text: 'Le offerte disponibili',
             pres: () {},
@@ -117,14 +122,14 @@ class _BodyState extends State<Body> {
     );
   }
 
-  SizedBox tessere() {
+  SizedBox tessere(filteredMap) {
     return SizedBox(
       height: 150.0,
       child: ListView.builder(
         physics: ClampingScrollPhysics(),
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
-        itemCount: widget.items.length,
+        itemCount: filteredMap.length,
         itemBuilder: (BuildContext context, int index) => Card(
           elevation: 10,
           shadowColor: Colors.grey.withOpacity(0.5),
@@ -141,7 +146,7 @@ class _BodyState extends State<Body> {
                         context,
                         MaterialPageRoute(
                             builder: (context) => BusinessPage(
-                                uid: widget.items.keys
+                                uid: filteredMap.keys
                                     .elementAt(index)
                                     .toString())),
                       );
@@ -160,7 +165,7 @@ class _BodyState extends State<Body> {
               ),
               FutureBuilder<List<String>>(
                   future: getUrlLogoEName(
-                      widget.items.keys.elementAt(index).toString().trim()),
+                      filteredMap.keys.elementAt(index).toString().trim()),
                   builder:
                       (BuildContext context, AsyncSnapshot<List<String>> snapshot) {
                     if (snapshot.hasError) {
