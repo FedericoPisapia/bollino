@@ -1,10 +1,11 @@
+import 'package:bollino/UI/home_bottom_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:bollino/business_registration.dart';
 import 'package:bollino/metodi_database.dart';
 import '../home_business.dart';
 import '../home.dart';
-import 'UI/interfaccia_home.dart';
+import 'UI/interfaccia_home_utente.dart';
 import '../metodi_image.dart';
 
 class Altro extends StatefulWidget {
@@ -123,7 +124,7 @@ class _AltroState extends State<Altro> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => HomeUI()),
+                  builder: (context) => HomeBottomBar()),
             );},
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,

@@ -36,7 +36,40 @@ class _HomeUIState extends State<HomeUI> {
             }
             if (snapshot.hasData) {
               Map<String, dynamic> items = snapshot.data!['Business'];
-              return Body(items);
+              return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                  stream: FirebaseFirestore.instance
+                      .collection('business').
+                  withConverter<Map<String, dynamic>>(
+                    fromFirestore: (snapshot, _) => snapshot.data() ?? Map<String, dynamic>(),
+                    toFirestore: (model, _) => Map<String, dynamic>.from(model as Map),
+                  )
+                      .snapshots(),
+                  builder:
+                      (context, snapshot) {
+                    if (snapshot.hasError) {
+                      return Text('Something went wrong');
+                    }
+
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Text("Loading");
+                    }
+                    /*if (snapshot.hasData &&
+                        snapshot.data!['Offerta'].toString() == '') {
+                      return Container();
+                    }*/
+                    if (snapshot.hasData) {
+
+                      var offerta = snapshot.data!;
+                      print('offerta ---------');
+                      print(offerta.docs.elementAt(1)['Offerta'].keys);
+
+                      snapshot.data!.docs.forEach((element) {print(element['Uid']);});
+                      //print(snapshot.data!['offerta'].toString());
+                      return Body(items,offerta);
+                    }
+                    return Container();
+                  });
+                //Body(items);
             }
             return Container();
           }),
