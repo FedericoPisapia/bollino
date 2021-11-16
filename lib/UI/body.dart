@@ -19,13 +19,11 @@ class _BodyState extends State<Body> {
   String uri = '';
   String nomeLocale = '';
   String search = '';
-  Map filteredMapItems = new Map();
 
-  var filteredMapOfferta ;
+  var filteredMapOfferta;
 
   @override
   void initState() {
-    filteredMapItems = widget.items;
     filteredMapOfferta = widget.offerta;
   }
 
@@ -94,12 +92,7 @@ class _BodyState extends State<Body> {
                           setState(() {
                             search = text;
                             print(search);
-                            filteredMapItems = new Map.fromIterable(
-                                widget.items.keys
-                                    .where((k) => k.startsWith(search)),
-                                key: (k) => k,
-                                value: (k) => widget.items[k]);
-                            print(filteredMapItems);
+
                           });
                         },
                         decoration: InputDecoration(
@@ -115,14 +108,10 @@ class _BodyState extends State<Body> {
               ],
             ),
           ),
-          TitleWithMore(
-            text: 'Le tue tessere',
-            pres: () {},
-          ),
+
           //40% dello screen
-          tessere(filteredMapItems, size),
           TitleWithMore(
-            text: 'Le offerte disponibili',
+            text: 'I TOUI PIEDINI',
             pres: () {},
           ),
           tessereOfferte(filteredMapOfferta,size),
@@ -131,85 +120,7 @@ class _BodyState extends State<Body> {
     );
   }
 
-  SizedBox tessere(filteredMap,size) {
-    print(filteredMap.length);
-    return SizedBox(
-      height: 150.0,
-      child: ListView.builder(
-        physics: ClampingScrollPhysics(),
-        shrinkWrap: true,
-        scrollDirection: Axis.horizontal,
-        itemCount: filteredMap.length,
-        itemBuilder: (BuildContext context, int index) => Card(
-          elevation: 10,
-          shadowColor: Colors.grey.withOpacity(0.5),
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-          child: Column(
-            children: [
-              SizedBox(height: 2),
-              Stack(
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => BusinessPage(
-                                uid: filteredMap.keys
-                                    .elementAt(index)
-                                    .toString())),
-                      );
-                    },
-                    child: Container(
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
-                        child: Image.asset(
-                          'images/corta.jpg',
-                          width: 200,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              FutureBuilder<List<String>>(
-                  future: getUrlLogoEName(
-                      filteredMap.keys.elementAt(index).toString().trim()),
-                  builder: (BuildContext context,
-                      AsyncSnapshot<List<String>> snapshot) {
-                    if (snapshot.hasError) {
-                      print('erore');
-                    }
-                    if (snapshot.hasData) {
-                      uri = snapshot.data![0].toString();
-                      var nomeLocale = snapshot.data![1].toString();
-                      if (uri != '') {
-                        return Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
-                            Column(
-                              children: [
-                                Text(nomeLocale),
-                              ],
-                            ),
-                            Container(
-                              width: 50,
-                              height: 50,
-                              child: Image.network(uri),
-                            ),
-                          ],
-                        );
-                      }
-                    }
-                    return Container();
-                  })
-            ],
-          ),
-        ),
-      ),
-    );
-  }
+
   SizedBox tessereOfferte(filteredMap,size) {
     print(filteredMap.size);
     return SizedBox(
