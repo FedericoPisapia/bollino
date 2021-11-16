@@ -11,6 +11,8 @@ import '../UI/interfaccia_home_utente.dart';
 import '../home_stream.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
+import 'home_wallet.dart';
+
 class HomeBottomBar extends StatefulWidget {
   const HomeBottomBar({Key? key}) : super(key: key);
 
@@ -25,9 +27,7 @@ class _HomeBottomBarState extends State<HomeBottomBar> {
   static final List<Widget> _widgetOptions = <Widget>[
     HomeUI(),
     HomeQr(),
-    Altro(
-      home: home,
-    ),
+    HomeWallet()
   ];
 
   void _onItemTapped(int index) {

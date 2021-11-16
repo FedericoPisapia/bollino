@@ -1,6 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
+import 'components.dart';
+
 class HeaderWithSearchBox extends StatefulWidget {
    HeaderWithSearchBox({
     Key? key,
@@ -24,33 +26,7 @@ class _HeaderWithSearchBoxState extends State<HeaderWithSearchBox> {
       height: widget.size.height * 0.2,
       child: Stack(
         children: <Widget>[
-          Container(
-            padding: EdgeInsets.only(
-              left: 10,
-              bottom: 50,
-            ),
-            height: widget.size.height * 0.21 - 27, //grandezza bordo viola
-            decoration: const BoxDecoration(
-                color: Colors.deepPurpleAccent,
-                borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(36),
-                    bottomRight: Radius.circular(36))),
-            child: Row(
-              children: <Widget>[
-                Text(
-                  'Ciao NomeUtente!',
-                  style: Theme.of(context).textTheme.headline5!.copyWith(
-                      color: Colors.white, fontWeight: FontWeight.bold),
-                ),
-                Spacer(),
-                Image.asset(
-                  'images/logo.png',
-                  height: 150,
-                  width: 150,
-                )
-              ],
-            ),
-          ),
+          header_home(context, widget.size, 'hello'),
           Positioned(
               bottom: 0,
               left: 0,
@@ -90,4 +66,6 @@ class _HeaderWithSearchBoxState extends State<HeaderWithSearchBox> {
       ),
     );
   }
+
+
 }
