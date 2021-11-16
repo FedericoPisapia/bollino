@@ -39,6 +39,7 @@ class _HomeBottomBarState extends State<HomeBottomBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       key: _scaffoldKey,
       body: _widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
@@ -52,45 +53,13 @@ class _HomeBottomBarState extends State<HomeBottomBar> {
             label: 'QRcode',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.view_headline_sharp),
-            label: 'Altro',
+            icon: Icon(Icons.account_balance_wallet),
+            label: 'wallet',
           ),
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.deepPurpleAccent,
         onTap: _onItemTapped,
-      ),
-      drawer: Drawer(
-        child: ListView(
-          // Important: Remove any padding from the ListView.
-          padding: EdgeInsets.zero,
-          children: [
-            const DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-              child: Text('Drawer Header'),
-            ),
-            ListTile(
-              title: const Text('Item 1'),
-              onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: const Text('Item 2'),
-              onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.pop(context);
-              },
-            ),
-          ],
-        ),
       ),
     );
   }
