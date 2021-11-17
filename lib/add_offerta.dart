@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-
+import 'package:geocoding/geocoding.dart';
 import 'metodi_database.dart';
+import 'package:location/location.dart' as loc;
+import 'package:geolocator/geolocator.dart';
 
 class AddOfferta extends StatefulWidget {
   const AddOfferta({Key? key}) : super(key: key);
@@ -12,6 +14,10 @@ class AddOfferta extends StatefulWidget {
 class _AddOffertaState extends State<AddOfferta> {
   String nomeOfferta = '';
   String descrizioneOfferta = '';
+  String locationMessagge = '';
+  var location = loc.Location();
+
+  Map<String, double> userLocation = Map();
 
   @override
   Widget build(BuildContext context) {
@@ -58,9 +64,32 @@ class _AddOffertaState extends State<AddOfferta> {
                 addOfferta(nomeOfferta, descrizioneOfferta);
                 Navigator.pop(context);
               },
-              child: Text('carica offerta'))
+              child: Text('carica offerta')),
+          ElevatedButton(
+              onPressed: () {
+                getCurrentLocation();
+                getLocationFromAddress();
+              },
+              child: Text('indirizzo in geolog'))
         ],
       ),
     );
+  }
+
+  void getCurrentLocation() async {
+    var position = await Geolocator()
+        .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    var lastPosition = await Geolocator().getLastKnownPosition();
+    print(lastPosition);
+    setState(() {
+      locationMessagge = "$position.latitude, $position.longitude";
+    });
+  }
+
+  Future<List<Location>> getLocationFromAddress() async {
+    List<Location> locations =
+        await locationFromAddress("viale legioni romane 65, Milano");
+    print('indirizzo locale = '+locations.toString());
+    return locations;
   }
 }
