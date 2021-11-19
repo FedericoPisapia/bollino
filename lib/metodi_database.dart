@@ -154,3 +154,21 @@ Future<List<String>> getUrlLogoEName(String uid) async {
     snapShot.data()!['NomeBusiness'].toString()
   ];
 }
+
+Future<void> addOfferta2(String titolo, int durata, String descrizione,
+    String urlImageOfferta, geoLoc) async {
+  String uid = getUid();
+
+  return FirebaseFirestore.instance.collection('business').doc(uid).collection('Offerta').doc()
+      .set({
+        'Titolo': titolo,
+        'Durata': durata,
+        'Descrizione': descrizione,
+        'Lat': geoLoc.elementAt(0),
+        'Long': geoLoc.elementAt(1),
+        'URL_Offerta': urlImageOfferta,
+      })
+      .then((value) => print("Offerta business"))
+      .catchError(
+          (error) => print("+++++++++++++++++  Failed to add Offerta: $error"));
+}

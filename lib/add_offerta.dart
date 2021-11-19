@@ -60,9 +60,11 @@ class _AddOffertaState extends State<AddOfferta> {
             ),
           ),
           ElevatedButton(
-              onPressed: () {
-                addOfferta(nomeOfferta, descrizioneOfferta);
-                Navigator.pop(context);
+              onPressed: () async  {
+
+                print('+++++++++++++++++++');
+                 addOfferta2(nomeOfferta, 10, descrizioneOfferta,'', await getLocationFromAddress(), );
+                print('+++++++++++++++++++');
               },
               child: Text('carica offerta')),
           ElevatedButton(
@@ -86,10 +88,24 @@ class _AddOffertaState extends State<AddOfferta> {
     });
   }
 
-  Future<List<Location>> getLocationFromAddress() async {
+  Future<List> getLocationFromAddress() async {
+
     List<Location> locations =
         await locationFromAddress("viale legioni romane 65, Milano");
-    print('indirizzo locale = '+locations.toString());
-    return locations;
+
+    String prova = locations.elementAt(0).toString();
+
+    var firstIndex = prova.indexOf(',');
+    String lat=prova.substring(0, firstIndex).trim();
+    lat = lat.substring(10, lat.length);
+    prova =  prova.substring( firstIndex+1, prova.length);
+    var secondIndex = prova.indexOf(',');
+    String long =prova.substring(0, secondIndex).trim();
+    long= long.substring(11, long.length);
+    List<String> geoLoc = [lat,long];
+    print(geoLoc.elementAt(0));
+    print(geoLoc.elementAt(1));
+    return geoLoc;
   }
+
 }
